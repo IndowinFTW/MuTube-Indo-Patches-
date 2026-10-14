@@ -49,7 +49,7 @@ Once installed, open the YouTube app and you should see a popup on the top right
 `inject.js` removes the `width`/`height` parameters from `MediaSource.isTypeSupported` so that YouTube offers 4K playback.
 That also hides the size limits the app normally enforces, so YouTube can pick VP9 formats that devices without hardware VP9 decoding cannot keep up with, causing the video to fall behind the audio (it catches up when you pause).
 
-To resolve this, ‘inject.js` applies the limits per device model, using the model in the user agent to determine proper playback configurations:
+To resolve this, `inject.js` applies the limits per device model, using the model in the user agent to determine proper playback configurations:
 
 | Device | Limits |
 | --- | --- |
@@ -60,7 +60,7 @@ To resolve this, ‘inject.js` applies the limits per device model, using the mo
 Options at the top of `inject.js`:
 
 - `BLOCK_4K_HDR`: also refuse HDR above 1440p on the devices shown above.
-- `SHOW_BANNER`: show the detected device and active limits on screen for 15 seconds after load,for debugging purposes. 
+- `SHOW_BANNER`: show the detected device and active limits on screen for 15 seconds after load, for debugging purposes. 
 
 ### Known issues
 
