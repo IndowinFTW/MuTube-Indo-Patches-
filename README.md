@@ -1,7 +1,7 @@
 # μTube
 
-MuTube enhances YouTube on Apple TV with [TizenTube Cobalt](https://github.com/reisxd/TizenTubeCobalt)'s userscript,
-which removes ads and adds support for features like SponsorBlock.
+MuTube enhances YouTube on Apple TV with [TizenTube Cobalt’s](https://github.com/reisxd/TizenTubeCobalt) userscript,
+which removes advertisements and adds support for features like SponsorBlock.
 
 ## Setup
 
@@ -42,30 +42,30 @@ make KEEP_SUPPORTED_DEVICES=1
 ## Usage
 
 Sideload the generated `mutube.ipa` onto your Apple TV using a tool like [Sideloadly](https://sideloadly.io/) or [ATVLoadly](https://github.com/bitxeno/atvloadly).
-Once installed, open the YouTube app and you should see a popup on the top right corner indicating that TizenTube has loaded successfully.
+Once installed, open the YouTube app and you should see a popup on the top right corner indicating that TizenTube has loaded successfully. This pop up can be removed in settings.
 
 ## Playback limits on slower devices
 
-`inject.js` removes the `width`/`height` parameters from `MediaSource.isTypeSupported` so that YouTube offers 4K.
-That also hides the size limits the app normally enforces, so YouTube can pick VP9 formats that devices without hardware VP9 decoding cannot keep up with. The video then falls behind the audio (it catches up when you pause).
+`inject.js` removes the `width`/`height` parameters from `MediaSource.isTypeSupported` so that YouTube offers 4K playback.
+That also hides the size limits the app normally enforces, so YouTube can pick VP9 formats that devices without hardware VP9 decoding cannot keep up with, causing the video to fall behind the audio (it catches up when you pause).
 
-`inject.js` applies the limits per device model, using the model in the user agent:
+To resolve this, ‘inject.js` applies the limits per device model, using the model in the user agent to determine proper playback configurations:
 
 | Device | Limits |
 | --- | --- |
-| Apple TV 4K (1st generation) | VP9 above 1440p only up to 30 fps, so 4K60 is not offered (1440p60 and 4K30 are). HDR above 1080p only up to 30 fps (1080p60, 1440p30 and 4K30 HDR are still offered). |
-| Apple TV HD | VP9 only up to 1080p30 or 720p, which are the limits the official app applies to software VP9 decoding. H.264 is not limited, so 1080p60 plays as H.264. |
+| Apple TV 4K (1st generation) | VP9 above 1440p only up to 30 fps, so 4K60 is not offered (1440p60 and 4K30 are). HDR above 1080p only up to 30 fps (1080p60, 1440p30 and 4K30 HDR are still offered) |
+| Apple TV HD | VP9 only up to 1080p30 or 720p, which are the limits the official app applies to software VP9 decoding. H.264 is not limited, so 1080p60 plays as H.264 |
 | Other models | None |
 
 Options at the top of `inject.js`:
 
-- `BLOCK_4K_HDR`: also refuse HDR above 1440p on the devices above.
+- `BLOCK_4K_HDR`: also refuse HDR above 1440p on the devices shown above.
 - `SHOW_BANNER`: show the detected device and active limits on screen for 15 seconds after load,for debugging purposes. 
 
 ### Known issues
 
 - Apple TV 4K (1st generation): 4K30 HDR can hitch occasionally. Set `BLOCK_4K_HDR = true` to avoid it. Please note that this will remove 4K HDR support. 
 
-- Apple TV 4K (2nd generation): untested, some reports of playback issues, no limits are currently applied. Fixes are pending further testing.
+- Apple TV 4K (2nd generation): untested, some reports of audio desync, no limits are currently applied. Fixes are pending further testing.
 
 - Apple TV 4K (3rd generation): some reports of audio desync when watching content that’s over an hour long, no limits are currently applied. Fixes are pending further testing.
