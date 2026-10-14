@@ -32,7 +32,7 @@ make PRINTF_LOGS=1
 ```
 
 The build removes `UISupportedDevices` from the app's `Info.plist`. The stock YouTube IPA only lists the
-Apple TV 4K 1st and 2nd generation, so without this the Apple TV HD refuses to install it. To keep the
+Apple TV 4K (1st and 2nd generations), so without this the Apple TV HD refuses to install the IPA. To keep the
 original list:
 
 ```bash
@@ -41,7 +41,7 @@ make KEEP_SUPPORTED_DEVICES=1
 
 ## Usage
 
-Sideload the generated `mutube.ipa` onto your Apple TV using a tool like [Sideloadly](https://sideloadly.io/) or [ATVLoadly]( GitHub - bitxeno/atvloadly: Easily sideload the IPA to AppleTV )
+Sideload the generated `mutube.ipa` onto your Apple TV using a tool like [Sideloadly](https://sideloadly.io/) or [ATVLoadly](https://github.com/bitxeno/atvloadly).
 Once installed, open the YouTube app and you should see a popup on the top right corner indicating that TizenTube has loaded successfully.
 
 ## Playback limits on slower devices
@@ -55,16 +55,16 @@ That also hides the size limits the app normally enforces, so YouTube can pick V
 | --- | --- |
 | Apple TV 4K (1st generation) | VP9 above 1440p only up to 30 fps, so 4K60 is not offered (1440p60 and 4K30 are). HDR above 1080p only up to 30 fps (1080p60, 1440p30 and 4K30 HDR are still offered). |
 | Apple TV HD | VP9 only up to 1080p30 or 720p, which are the limits the official app applies to software VP9 decoding. H.264 is not limited, so 1080p60 plays as H.264. |
-| Other models | None. |
+| Other models | None |
 
 Options at the top of `inject.js`:
 
 - `BLOCK_4K_HDR`: also refuse HDR above 1440p on the devices above.
-- `SHOW_BANNER`: show the detected device and active limits on screen for 15 seconds after load, for debugging purposes. 
+- `SHOW_BANNER`: show the detected device and active limits on screen for 15 seconds after load,for debugging purposes. 
 
 ### Known issues
 
-- Apple TV 4K (1st generation): 4K30 HDR can hitch occasionally. Set `BLOCK_4K_HDR = true` to avoid it. Please note that this will remove 4K 30fps HDR support. 
+- Apple TV 4K (1st generation): 4K30 HDR can hitch occasionally. Set `BLOCK_4K_HDR = true` to avoid it. Please note that this will remove 4K HDR support. 
 
 - Apple TV 4K (2nd generation): untested, some reports of playback issues, no limits are currently applied. Fixes are pending further testing.
 
